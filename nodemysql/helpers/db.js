@@ -7,4 +7,11 @@ const connection = mysql.createConnection({
   database: "todoapp",
 });
 
+connection.connect((err) => {
+  if (err) {
+    console.log("error while connecting to db", err);
+  }
+  console.log("Mysql connected successfully");
+});
+
 module.exports = connection;

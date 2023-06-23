@@ -2,21 +2,14 @@ const express = require("express");
 const app = express();
 const { mid } = require("./middlewares/samplemiddleware");
 const connection = require("./helpers/db");
+const routes = require("./routes/index");
 
 app.use(express.json());
 
-app.get("/", mid, (req, res) => {
-  connection.query("SELECT * FROM `todolist23`", function (err, results) {
-    if (err) {
-      console.log(err);
-      return res
-        .status(400)
-        .send({ message: "Error while getting data", error: err });
-    }
-    console.log(results); // results contains rows returned by server
+app.use("/api", routes);
 
-    return res.send({ message: "Successfully retrieved", data: results });
-  });
+app.get("/", (req, res) => {
+  res.send({ message: "Main route" });
 });
 
 app.listen(4000, () => {
