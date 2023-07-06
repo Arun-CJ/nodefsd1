@@ -6,11 +6,17 @@ const registerSchema = Joi.object({
     "string.max": "Name should not exceed 30 charcters",
   }),
   email: Joi.string().email().required(),
-  city: Joi.string().required().max(3),
+  city: Joi.string().required(),
   password: Joi.string().min(8).required(),
   phoneNumber: Joi.number().required(),
 });
 
+const loginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+});
+
 module.exports = {
   registerSchema,
+  loginSchema,
 };

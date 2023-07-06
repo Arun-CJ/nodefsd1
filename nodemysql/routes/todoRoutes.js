@@ -1,13 +1,25 @@
 const express = require("express");
 const router = express.Router();
-// const connection = require("../helpers/db");
+const authJWT = require("../middlewares/authJWT");
 const todoController = require("../controllers/todoController");
 
-router.get("/getAllList", todoController.getALLTodoList);
+router.get(
+  "/getAllList",
+  authJWT.verifyJWTToken,
+  todoController.getALLTodoList
+);
 
-router.post("/addTodoItem", todoController.addTodoItem);
+router.post("/addTodoItem", authJWT.verifyJWTToken, todoController.addTodoItem);
 
-router.put("/updateTodoItem", todoController.updateTodoItem);
-router.delete("/deleteTodoItem/:id", todoController.deleteTodo);
+router.put(
+  "/updateTodoItem",
+  authJWT.verifyJWTToken,
+  todoController.updateTodoItem
+);
+router.delete(
+  "/deleteTodoItem/:id",
+  authJWT.verifyJWTToken,
+  todoController.deleteTodo
+);
 
 module.exports = router;

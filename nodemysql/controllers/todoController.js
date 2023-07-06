@@ -10,7 +10,7 @@ module.exports = {
           .send({ message: "Error while getting data", error: err });
       }
       //   console.log(results); // results contains rows returned by server
-
+      console.log(res.decoded, "inside todocontroller");
       return res.send({
         message: "Successfully retrieved todo list",
         data: results,
