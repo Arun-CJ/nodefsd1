@@ -4,7 +4,7 @@ const { ACCESS_TOKEN } = require("../config/config");
 module.exports.signJWTToken = (payload) => {
   return new Promise((resolve, reject) => {
     const options = {
-      expiresIn: "12h",
+      expiresIn: "1h",
     };
     jwt.sign(payload, ACCESS_TOKEN, options, function (err, token) {
       // console.log(token);
@@ -27,6 +27,7 @@ module.exports.verifyJWTToken = async (req, res, next) => {
     res.decoded = decoded;
     return next();
   } catch (error) {
+    console.log(error);
     return res.status(401).send({ message: error?.message, error: error });
   }
 };

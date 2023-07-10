@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const todoController = require("../controllers/todoController");
+const userController = require("../controllers/userController");
+const authJWT = require("../middlewares/authJWT");
 
-router.get("/getAllUsers", todoController.getALLTodoList);
+// router.get("/getAllUsers", todoController.getALLTodoList);
 
-router.post("/getsingleuser/:id", todoController.addTodoItem);
+router.get("/getUserInfo", authJWT.verifyJWTToken, userController.getUserInfo);
 
 // router.put("/updateTodoItem", todoController.updateTodoItem);
 // router.delete("/deleteTodoItem/:id", todoController.deleteTodo);
