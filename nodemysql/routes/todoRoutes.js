@@ -9,6 +9,12 @@ router.get(
   todoController.getALLTodoList
 );
 
+router.get(
+  "/getUserTodoList/:userId",
+  authJWT.verifyJWTToken,
+  todoController.getUserTodoList
+);
+
 router.post("/addTodoItem", authJWT.verifyJWTToken, todoController.addTodoItem);
 
 router.put(
