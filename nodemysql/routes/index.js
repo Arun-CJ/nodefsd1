@@ -8,5 +8,6 @@ const userRoutes = require("./userRoutes");
 router.use("/todo", todoRoutes);
 router.use("/auth", authRoutes);
 router.use("/user", userRoutes);
+router.use("/mail", require("./mailRoutes"));
 
 module.exports = router;

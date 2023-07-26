@@ -60,7 +60,7 @@ module.exports = {
     console.log("inside update todo", req.body);
     const data = req.body;
     connection.query(
-      `update todolist set name = '${data.name}' where id = ${data.id}`,
+      `update todolist set name = '${data.name}' where todoId = ${data.id}`,
       (err, results) => {
         if (err) {
           console.log(err, "inside update todo");
@@ -76,7 +76,20 @@ module.exports = {
     );
   },
   deleteTodo: (req, res) => {
-    console.log("inside delete");
-    res.send({ message: "Inside delete" });
+    connection.query(
+      `delete  from todolist where todoId = ${req.params.id}`,
+      (err, results) => {
+        if (err) {
+          console.log(err, "inside update todo");
+          return res
+            .status(400)
+            .send({ message: "Error while updateing data", error: err });
+        }
+        return res.send({
+          message: "Successfully updated todo item",
+          data: results,
+        });
+      }
+    );
   },
 };
